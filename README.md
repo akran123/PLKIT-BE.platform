@@ -17,21 +17,22 @@
 
 PLKIT-BE.platform is a backend service built with FastAPI, designed to manage operations for a community and market platform. It includes user authentication, community and market functionalities, and status management. Its modular architecture ensures maintainability and scalability.
 
+fastapi로 제작이 되었고 community와 market platform을 위해 디자인 되었다. 사용자 인증 커뮤니티 기능이 있다.
 ## Project Structure
 
 ```
 PLKIT-BE.platform-develop/
-├── crud/                  # CRUD operations for models
+├── crud/                  # CRUD operations for models 모델 crud를 위한 기능 집합합
 │   ├── community.py
 │   ├── market.py
 │   ├── user.py
 │   └── __init__.py
-├── models/                # Database models
+├── models/                # Database models   데이터베이스 모델 정의의
 │   ├── community.py
 │   ├── market.py
 │   ├── user.py
 │   └── __init__.py
-├── routers/               # API route handlers
+├── routers/               # API route handlers  각 파트별 라우터 구분분
 │   ├── auth.py
 │   ├── communities.py
 │   ├── dummies.py
@@ -39,17 +40,17 @@ PLKIT-BE.platform-develop/
 │   ├── statuses.py
 │   ├── users.py
 │   └── __init__.py
-├── schemas/               # Pydantic models for validation
+├── schemas/               # Pydantic models for validation   검증 절차(Pydantic이용해서)
 │   ├── auth.py
 │   ├── community.py
 │   ├── market.py
 │   ├── user.py
 │   └── __init__.py
-├── config.py              # Configuration settings
-├── database.py            # Database connection and setup
-├── main.py                # FastAPI entry point
-├── security.py            # Security functions (e.g., JWT handling)
-├── requirements.txt       # Python dependencies
+├── config.py              # Configuration settings        config 세팅(데이터베이스 서버 등등등)
+├── database.py            # Database connection and setup   데이터베이스 연결 및 세팅팅
+├── main.py                # FastAPI entry point                fastapi 엔드포인트
+├── security.py            # Security functions (e.g., JWT handling)     보안절차(jwt)
+├── requirements.txt       # Python dependencies         요구사항 정리리
 └── .gitignore             # Git ignored files
 ```
 
@@ -65,7 +66,7 @@ PLKIT-BE.platform-develop/
 ### Prerequisites
 
 - Python 3.8+
-- Virtual environment tool (`venv`, `virtualenv`, `conda`)
+- Virtual environment tool (`venv`, `virtualenv`, `conda`)   가상환경 필요요
 
 ### Installation
 
