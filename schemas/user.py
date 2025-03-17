@@ -15,7 +15,7 @@ class UserResponse(UserBase):
     email: EmailStr
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserUpdate(UserBase):
     pass
@@ -31,4 +31,4 @@ class UserLinkResponse(UserLinkCreate):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

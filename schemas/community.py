@@ -9,7 +9,7 @@ class WriterResponse(BaseModel):
     avatar: Optional[str] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class CommunityCreate(BaseModel):
@@ -27,7 +27,7 @@ class CommunityResponse(BaseModel):
     answers: List[dict] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         
 class CommunitySearchResponse(BaseModel):
     id: int
@@ -40,12 +40,12 @@ class CommunitySearchResponse(BaseModel):
     answers: List[dict] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         
 class CommunityUpdate(BaseModel):
     title: Optional[str] = None
     content: Optional[str] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
