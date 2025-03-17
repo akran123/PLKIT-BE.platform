@@ -11,7 +11,7 @@ class Community(Base):
     title = Column(String, nullable=False)
     content = Column(Text)
     image = Column(String, nullable=True)
-    writer_id = Column(Integer, ForeignKey("user.id"))
+    writer_id = Column(Integer, ForeignKey("users.id"))
     created_at = Column(DateTime, default=datetime.utcnow)
 
     # writer 관계 설정
