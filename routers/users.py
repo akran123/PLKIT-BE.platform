@@ -19,7 +19,7 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 @router.get("/me", response_model=UserResponse)
 async def read_user_me(
-    current_user: schemas.user.UserResponse = Depends(get_current_user),
+    current_user: UserResponse = Depends(get_current_user),
 ):
     """
     현재 로그인한 사용자의 정보를 반환합니다.
@@ -30,7 +30,7 @@ async def read_user_me(
 async def update_user_name(
     name: Optional[str] = None,
     db: Session = Depends(database.get_db),
-    current_user: schemas.user.UserResponse = Depends(get_current_user),
+    current_user: UserResponse = Depends(get_current_user),
 ):
     """
     현재 로그인된 사용자의 이름을 업데이트합니다.
@@ -49,7 +49,7 @@ async def update_user_name(
 async def update_user_avatar(
     avatar: UploadFile = File(...),
     db: Session = Depends(database.get_db),
-    current_user: schemas.user.UserResponse = Depends(get_current_user),
+    current_user: UserResponse = Depends(get_current_user),
 ):
     """
     현재 로그인된 사용자의 프로필 이미지를 업데이트합니다.
@@ -76,7 +76,7 @@ async def update_user_avatar(
 
 @router.get("/me/avatar", response_class=FileResponse)
 async def get_user_avatar(
-    current_user: schemas.user.UserResponse = Depends(get_current_user),
+    current_user: UserResponse = Depends(get_current_user),
 ):
     """
     현재 로그인된 사용자의 프로필 이미지를 반환합니다.
@@ -104,7 +104,7 @@ async def get_user_avatar_by_id(
     """
     
     # 사용자 조회
-    user = crud.user.get_user_by_id(db, user_id=id)   
+    user = crud.user.get_user_by_id(db, user_id=id)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="사용자를 찾을 수 없습니다."

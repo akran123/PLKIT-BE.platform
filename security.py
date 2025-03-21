@@ -7,7 +7,7 @@ from config import settings
 import crud, database
 
 # OAuth2PasswordBearer setup
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")  #토큰 받기위한 경로로
 
 # Dependency for getting the current user
 async def get_current_user(

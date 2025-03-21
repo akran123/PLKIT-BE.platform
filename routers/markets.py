@@ -9,16 +9,16 @@ import crud, schemas
 from database import get_db
 from uuid import uuid4
 from pathlib import Path
-
+from schemas.market import MarketResponse, MarketCreate, MarketBase, MarketUpdate
 router = APIRouter(prefix="/markets", tags=["Market"])
 
 # 이미지 저장 경로 설정
 UPLOAD_DIR = Path("uploads/market_images")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
-@router.post("/", response_model=schemas.market.MarketResponse)
+@router.post("/", response_model=MarketResponse)
 async def create_market(
-    market: schemas.market.MarketCreate,
+    market: MarketCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -29,7 +29,7 @@ async def create_market(
     new_market = crud.market.create_market(db, market)
     return new_market
 
-@router.patch("/{market_id}", response_model=schemas.market.MarketResponse)
+@router.patch("/{market_id}", response_model=MarketResponse)
 async def update_market(
     market_id: int,
     market_update: schemas.market.MarketUpdate,
