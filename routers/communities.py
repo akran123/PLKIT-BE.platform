@@ -10,6 +10,7 @@ from database import get_db
 from uuid import uuid4
 from pathlib import Path
 from security import get_current_user
+from schemas.community import CommunityResponse, CommunitySearchResponse, CommunityCreate, CommunityUpdate
 
 router = APIRouter(prefix="/communities", tags=["Community"])
 
@@ -17,9 +18,9 @@ router = APIRouter(prefix="/communities", tags=["Community"])
 UPLOAD_DIR = Path("uploads/community_images")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
-@router.post("/", response_model=schemas.community.CommunityResponse)
+@router.post("/", response_model=CommunityResponse)
 async def create_community(
-    community: schemas.community.CommunityCreate, 
+    community: CommunityCreate, 
     db: Session = Depends(get_db), 
     current_user: User = Depends(get_current_user)
 ):
@@ -31,7 +32,7 @@ async def create_community(
     new_community = crud.community.create_community(db, community)
     return new_community
 
-@router.get("/{community_id}", response_model=schemas.community.CommunityResponse)
+@router.get("/{community_id}", response_model=CommunityResponse)
 async def get_community(community_id: int, db: Session = Depends(get_db)):
     """
     특정 커뮤니티 게시물의 상세 정보를 조회합니다.
@@ -41,10 +42,10 @@ async def get_community(community_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="게시물을 찾을 수 없습니다.")
     return community
 
-@router.patch("/{community_id}", response_model=schemas.community.CommunityResponse)
+@router.patch("/{community_id}", response_model=CommunityResponse)
 async def update_community(
     community_id: int, 
-    community_update: schemas.community.CommunityUpdate, 
+    community_update: CommunityUpdate, 
     db: Session = Depends(get_db), 
     current_user: User = Depends(get_current_user)
 ):
@@ -91,7 +92,7 @@ async def delete_community(
     crud.community.delete_community(db, community_id)
     return
 
-@router.get("/", response_model=List[schemas.community.CommunitySearchResponse])
+@router.get("/", response_model=List[CommunitySearchResponse])
 async def list_communities(keyword: Optional[str] = None, db: Session = Depends(get_db)):
     """
     모든 커뮤니티 게시물을 조회하거나 키워드로 필터링합니다.
