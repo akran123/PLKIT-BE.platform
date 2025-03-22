@@ -5,7 +5,7 @@ from typing import Optional
 class UserBase(BaseModel):
     email: EmailStr
     name: str
-    avatar: Optional[str] = None
+    avatar: Optional[str] = None  #orm 객체를 pydantic으로 가져올 때 사용
 
 class UserCreate(UserBase):
     password: str
