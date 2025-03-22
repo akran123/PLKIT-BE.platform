@@ -7,7 +7,7 @@ from config import settings
 import crud, database
 
 # OAuth2PasswordBearer setup
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")  #토큰 받기위한 경로로
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")  #토큰 받기위한 경로
 
 # Dependency for getting the current user
 async def get_current_user(
@@ -16,12 +16,12 @@ async def get_current_user(
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="자격 증명을 확인할 수 없습니다.",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+        headers={"WWW-Authenticate": "Bearer"},  
+    )  # WWW-Authenticate : 클라이언트가 인증이 필요할 때 서버가 인증 방식(Bearer 등)을 명시하는 HTTP 헤더
     try:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
-        )
+        )          # response 헤더에 들어오는 payload를 디코드(해석)해서 토큰, 시크릿키 추출
         email: str = payload.get("sub")
         if email is None:
             raise credentials_exception
