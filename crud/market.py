@@ -45,6 +45,7 @@ def delete_market(db: Session, market_id: int):
 
 def list_markets(db: Session, keyword: Optional[str] = None):
     query = db.query(Market)
+    print(query)
     if keyword:
         query = query.filter(Market.title.contains(keyword) | Market.content.contains(keyword))
     return query.all()
