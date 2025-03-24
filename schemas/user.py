@@ -15,7 +15,7 @@ class UserResponse(UserBase):
     email: EmailStr
 
     class Config:
-        from_attributes = True
+        from_attributes = True #orm 객체를 pydantic으로 가져올 때 사용
 
 class UserUpdate(UserBase):
     pass
